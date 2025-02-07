@@ -138,3 +138,19 @@ function queryResults(limit, queries) {
 
     return result; 
 };
+
+///Fasterrr of the above
+function queryResults(limit, queries) {
+    const ballMap = new Map();
+    const colorMap = new Map();
+    return queries.map(([ball, color]) => {
+        if (ballMap.has(ball)) {
+            const prevColor = ballMap.get(ball);
+            colorMap.set(prevColor, colorMap.get(prevColor) - 1);
+            if (colorMap.get(prevColor) === 0) colorMap.delete(prevColor);
+        }
+        ballMap.set(ball, color);
+        colorMap.set(color, (colorMap.get(color) ?? 0) + 1);
+        return colorMap.size; // Use `size` property, not `size()`
+    });
+};
