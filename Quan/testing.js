@@ -56,3 +56,35 @@ function areAlmostEqual(s1, s2) {
 
     return false;
 }
+
+
+// Strings are almost equal
+
+function checkAlmostEquivalent(word1, word2) {
+    let counterMap = new Map();
+
+    for(let i = 0; i < word1.length; i++){
+        const letter1 = word1[i];
+        if(counterMap.get(letter1)){
+            counterMap.set(letter1 , (counterMap.get(letter1)) + 1);
+        }else{
+            counterMap.set(letter1 , 1);
+        }
+
+        const letter2 = word2[i];
+        if(counterMap.get(letter2)){
+            counterMap.set(letter2 , (counterMap.get(letter2)) - 1);
+        }else{
+            counterMap.set(letter2 , -1);
+        }
+
+    }
+
+    for([key, value] of counterMap){
+        if(Math.abs(value) > 3){
+            return false;
+        }
+    }
+
+    return true;
+};
