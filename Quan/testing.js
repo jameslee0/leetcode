@@ -154,3 +154,50 @@ function queryResults(limit, queries) {
         return colorMap.size; // Use `size` property, not `size()`
     });
 };
+
+
+
+//Reverse Integer
+function reverse(x) {
+    const split = [...x.toString()];
+    let neg = false;
+    let newArray = [];
+    let index = 0;
+
+
+
+    if (x < 0) neg = true;
+    for (let i = split.length; i >= 0; i--) {
+
+        newArray[index] = split[i];
+        index++;
+    }
+
+    let result = parseInt(newArray.join(''));
+
+
+
+    if(neg) result *= -1;
+
+    if(result >= Math.pow(2, 31) + 1 || result <= Math.pow(-2, 31)) {
+        return 0;
+    } 
+    return result;
+};
+
+//Faster above 
+function reverse(n) {
+    let bit = Math.pow(2,31) -1;
+
+    let rev = n.toString().split('').reverse().join('');
+    let result = parseInt(rev)
+
+    if (result > bit || result < -(bit)){
+        return 0;
+    }
+    if(n<0){
+        return -result;
+    }else{
+        return result;
+    }
+};
