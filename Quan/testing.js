@@ -88,3 +88,53 @@ function checkAlmostEquivalent(word1, word2) {
 
     return true;
 };
+
+//Color map Query
+function queryResults(limit, queries) {
+    const ballMap = new Map(), colorMap = new Map()
+    let result = [];
+
+    for ([ballPosition, color] of queries) {
+        if (ballMap.has(ballPosition)) { 
+            let colorCount = colorMap.get(ballMap.get(ballPosition)) - 1;
+            if (colorCount == 0) {
+                colorMap.delete(ballMap.get(ballPosition));
+                uniqueColor--;
+            }
+            else {
+                colorMap.set(ballMap.get(ballPosition), colorCount);
+            }
+            
+        }
+
+        //Updating ballMap
+        ballMap.set(ballPosition, color);
+//First iteration
+// BallMap: [1: 4]
+// ColorMap: [4: 1]
+// Unique: 1
+// Result: [1]
+
+//Second Iteration
+// BallMap: [1: 4, 2: 5]
+// ColorMap: [4: 1, 5: 1]
+// Unique: 2
+// Result: [1, 2]
+
+//Third Iteration
+// BallMap: [1: 3, 2: 5, ]
+// ColorMap: [ 5: 1, 3: 1  ]
+
+// Unique: 2
+// Result: [1, 2, 2]
+
+        colorMap.set(color, (colorMap.get(color) ?? 0) + 1);
+
+        if (colorMap.get(color) === 1) {
+            uniqueColor++;
+        }
+        result.push(colorMap.size);
+    }
+
+    return result; 
+};
