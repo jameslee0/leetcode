@@ -204,3 +204,18 @@ function reverse(n) {
 
 //Daily
 
+function clearDigits(s) {
+    let stack = [];
+
+    for (let char of s){
+        if(!isNaN(char)) {
+            if(stack.length) {
+                stack.pop();
+            }
+        }
+        else {
+            stack.push(char);
+        }
+    }
+    return stack.join("");
+};
