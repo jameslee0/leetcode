@@ -219,3 +219,18 @@ function clearDigits(s) {
     }
     return stack.join("");
 };
+
+//Binary Watch 
+function readBinaryWatch(turnedOn) {
+    results = [];
+
+    for (hours = 0; hours < 12; hours++) {
+        for (minutes = 0; minutes < 60; minutes++) {
+            binaryNumber = ((hours * 64) + minutes).toString(2).split("").filter(ones => ones === "1").length;
+            if (binaryNumber === turnedOn) {
+                results.push(minutes >= 10 ? `${hours}:${minutes}` : `${hours}:0${minutes}`);
+            }
+        }
+    } 
+    return results;
+};
