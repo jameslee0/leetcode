@@ -234,3 +234,5 @@ function readBinaryWatch(turnedOn) {
     } 
     return results;
 };
+
+hi
