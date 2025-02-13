@@ -263,40 +263,41 @@ maximumSum([3, 6, 8, 5]);
  * @return {number}
  */
 
-var minOperations = function(nums, k) {
-    let stageCounter = 0;
+// Priority Queue Leetcode, but JS doesn't have a priority queue so commented out
+// function minOperations(nums, k) {
+//     let stageCounter = 0;
 
-    let queue = new MinPriorityQueue();
+//     let queue = new MinPriorityQueue();
 
 
-    // console.log(queue);
-    // queue.dequeue();
-    // console.log(queue);
-    for(num of nums) {
-        queue.enqueue(num);
-    }
-    // for(dict of queue._heap._nodes){
-    //     console.log(dict.value);
-    // }
-    // console.log(queue.dequeue().element);
+//     // console.log(queue);
+//     // queue.dequeue();
+//     // console.log(queue);
+//     for(num of nums) {
+//         queue.enqueue(num);
+//     }
+//     // for(dict of queue._heap._nodes){
+//     //     console.log(dict.value);
+//     // }
+//     // console.log(queue.dequeue().element);
 
-    // if(queue.size() > 2 || queue.front() >= k) {
-    //     stageCounter++;
-    // }
-    // (queue.size() >= 2 &&
-    while ( queue.front().element < k) {
-        // console.log([stageCounter, queue.size(), queue.front().element, queue._heap._nodes]);
-        let val1 = queue.dequeue().element;
-        let val2 = queue.dequeue().element;
+//     // if(queue.size() > 2 || queue.front() >= k) {
+//     //     stageCounter++;
+//     // }
+//     // (queue.size() >= 2 &&
+//     while ( queue.front().element < k) {
+//         // console.log([stageCounter, queue.size(), queue.front().element, queue._heap._nodes]);
+//         let val1 = queue.dequeue().element;
+//         let val2 = queue.dequeue().element;
 
-        val1 = (Math.min(val1, val2) * 2) + Math.max(val1,val2);
+//         val1 = (Math.min(val1, val2) * 2) + Math.max(val1,val2);
 
-        queue.enqueue(val1);
-        stageCounter++;
-    }
+//         queue.enqueue(val1);
+//         stageCounter++;
+//     }
 
-    return stageCounter;
-};
+//     return stageCounter;
+// };
 
 // var minOperations = function(nums, k) {
 //     nums.sort((a, b) => b- a)
@@ -348,3 +349,5 @@ var minOperations = function(nums, k) {
 //     }
 //     return res
 // };
+// minOperations([1, 2, 3, 4, 5, 6], 7);
+
