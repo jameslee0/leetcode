@@ -253,3 +253,98 @@ function maximumSum(nums) {
 };
 maximumSum([3, 6, 8, 5]);
 
+
+
+//Leetcode Daily
+
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+
+var minOperations = function(nums, k) {
+    let stageCounter = 0;
+
+    let queue = new MinPriorityQueue();
+
+
+    // console.log(queue);
+    // queue.dequeue();
+    // console.log(queue);
+    for(num of nums) {
+        queue.enqueue(num);
+    }
+    // for(dict of queue._heap._nodes){
+    //     console.log(dict.value);
+    // }
+    // console.log(queue.dequeue().element);
+
+    // if(queue.size() > 2 || queue.front() >= k) {
+    //     stageCounter++;
+    // }
+    // (queue.size() >= 2 &&
+    while ( queue.front().element < k) {
+        // console.log([stageCounter, queue.size(), queue.front().element, queue._heap._nodes]);
+        let val1 = queue.dequeue().element;
+        let val2 = queue.dequeue().element;
+
+        val1 = (Math.min(val1, val2) * 2) + Math.max(val1,val2);
+
+        queue.enqueue(val1);
+        stageCounter++;
+    }
+
+    return stageCounter;
+};
+
+// var minOperations = function(nums, k) {
+//     nums.sort((a, b) => b- a)
+//     let arr = [], operTime = 0, arrPos = 0
+//     while((nums.length > 0 && nums[nums.length-1] < k) || (arr.length > 0 && arr[arrPos] < k)) {
+//         let min1, min2
+//         console.log(['nums',nums]);
+//         if(nums[nums.length-1] && !(nums[nums.length-1] > arr[arrPos])) {
+//             min1 = nums.pop()
+//             console.log(['Log', operTime, 'min1', min1, 'arrPos', arrPos]);
+//         }
+//         else { 
+//             min1 = arr[arrPos]
+//             arrPos ++
+//             console.log(['Else', operTime, 'min1', min1, 'arrPos', arrPos]);
+//         }
+//         if(nums[nums.length-1] && !(nums[nums.length-1] > arr[arrPos])){
+//             min2 = nums.pop();
+//             console.log(['Log', operTime, 'min2', min2, 'arrPos', arrPos]);
+//         }
+
+//         else { 
+//             min2 = arr[arrPos]
+//             arrPos ++
+//             console.log(['Else', operTime, 'min2', min2, 'arrPos', arrPos]);
+//         }
+//         arr.push(min1*2 + min2)
+//         console.log(['arr', arr, 'postNums', nums])
+//         operTime ++
+//     }
+//     return operTime
+// };
+
+// var minOperations = function(nums, k) {
+//     let res = 0
+//     const pq = new PriorityQueue({
+//         compare: (a, b) => {
+//             return a > b ? 1 : -1;
+//         },
+//     });
+//     for(let n of nums){
+//         pq.enqueue(n)
+//     }
+//     while(pq._heap._nodes[0] < k && pq._heap._nodes.length > 1){
+//         let one = pq.dequeue()
+//         let two = pq.dequeue()
+//         pq.enqueue(Math.min(one,two)*2 + Math.max(one,two))
+//         res++
+//     }
+//     return res
+// };
