@@ -362,7 +362,6 @@ var ProductOfNumbers = function() {
 ProductOfNumbers.prototype.add = function(num) {
     if(num === 0) {
         this.stack = [1];
-        console.log(this.stack)
     }
     else {
         const index = this.stack.length;
