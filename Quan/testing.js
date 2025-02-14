@@ -351,3 +351,44 @@ maximumSum([3, 6, 8, 5]);
 // };
 // minOperations([1, 2, 3, 4, 5, 6], 7);
 
+var ProductOfNumbers = function() {
+    this.stack = [1];
+};
+
+/** 
+ * @param {number} num
+ * @return {void}
+ */
+ProductOfNumbers.prototype.add = function(num) {
+    if(num === 0) {
+        this.stack = [1];
+        console.log(this.stack)
+    }
+    else {
+        const index = this.stack.length;
+
+        const prevNum = this.stack[index - 1];
+
+        this.stack.push(prevNum * num);
+    }
+};
+
+/** 
+ * @param {number} k
+ * @return {number}
+ */
+ProductOfNumbers.prototype.getProduct = function(k) {
+    const length = this.stack.length;
+
+    if(k >= length) {
+        return 0;
+    }
+    return this.stack[length - 1] / this.stack[length - 1 - k]
+};
+
+/** 
+ * Your ProductOfNumbers object will be instantiated and called as such:
+ * var obj = new ProductOfNumbers()
+ * obj.add(num)
+ * var param_2 = obj.getProduct(k)
+ */
