@@ -419,3 +419,38 @@ function canPartition(s, target) {
     }
     return sum;
   }
+
+  var constructDistancedSequence = function(n) {
+    const arr = new Array(2 * n - 1).fill(null); 
+    const used = new Set(); 
+    
+    function backtrack(index) {
+        if (index === arr.length) return [...arr]; 
+        if (arr[index] !== null) return backtrack(index + 1); 
+
+        for (let num = n; num >= 1; num--) { 
+            if (used.has(num)) continue; 
+            if (num === 1) { 
+                arr[index] = 1;
+                used.add(1);
+                const result = backtrack(index + 1);
+                if (result) return result; 
+                arr[index] = null; 
+                used.delete(1);
+            } else { 
+                if (index + num < arr.length && arr[index + num] === null) {
+                    arr[index] = arr[index + num] = num; 
+
+                    used.add(num);
+                    const result = backtrack(index + 1);
+                    if (result) return result; 
+                    arr[index] = arr[index + num] = null; 
+                    used.delete(num);
+                }
+            }
+        }
+        return null;
+    }
+
+    return backtrack(0);
+};
