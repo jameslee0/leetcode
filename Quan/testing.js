@@ -611,3 +611,48 @@ var findDifferentBinaryString = function(nums) {
     }
     return result;    
 };
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ */
+var FindElements = function(root) {
+    let mySet = new Set();
+    this.mySet = mySet;
+    let copy = root;
+    function search(root, value) {
+        root.val = value;
+        this.mySet.add(value)
+        if (root.left) {
+            mySearch(root.left, value * 2 + 1)
+        }
+        if (root.right) {
+            mySearch(root.right, value * 2 + 2)
+        }
+    } 
+    let mySearch = search.bind(this);
+    mySearch(copy, 0)
+    
+    this.root = root;
+};
+
+/** 
+ * @param {number} target
+ * @return {boolean}
+ */
+FindElements.prototype.find = function(target) {
+    return this.mySet.has(target)
+};
+
+/** 
+ * Your FindElements object will be instantiated and called as such:
+ * var obj = new FindElements(root)
+ * var param_1 = obj.find(target)
+ */
