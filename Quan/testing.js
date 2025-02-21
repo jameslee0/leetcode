@@ -656,3 +656,13 @@ FindElements.prototype.find = function(target) {
  * var obj = new FindElements(root)
  * var param_1 = obj.find(target)
  */
+
+var isArraySpecial = function(nums) {
+    if(nums.lenghth == 1) {
+        return true;
+    }
+    for(i = 0; i < nums.length; i++) {
+        if((nums[i] + nums[i + 1]) % 2 === 0) return false;
+    }
+    return true;
+};
