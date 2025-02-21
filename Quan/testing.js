@@ -712,3 +712,46 @@ var longestMonotonicSubarray = function(nums) {
     return maxCount
 };
 
+var NumberContainers = function() {
+    this.array = new Map();
+    this.indexC = new Map();
+};
+
+/** 
+ * @param {number} index 
+ * @param {number} number
+ * @return {void}
+ */
+NumberContainers.prototype.change = function(index, number) {
+    this.indexC.set(index, number);
+    if(!this.array.has(number)){
+        this.array.set(number, new MinPriorityQueue());
+    }
+    this.array.get(number).enqueue(index);
+};
+
+/** 
+ * @param {number} number
+ * @return {number}
+ */
+NumberContainers.prototype.find = function(number) {
+    minNum = this.array.get(number);
+    if(!minNum) {
+        return -1;
+    }
+    while(!minNum.isEmpty()) {
+        minIndex = minNum.front();
+        if (this.indexC.get(minIndex) == number) {
+            return minIndex;
+        }
+        minNum.dequeue();
+    }
+    return -1;
+};
+
+/** 
+ * Your NumberContainers object will be instantiated and called as such:
+ * var obj = new NumberContainers()
+ * obj.change(index,number)
+ * var param_2 = obj.find(number)
+ */
