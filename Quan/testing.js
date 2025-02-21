@@ -678,3 +678,37 @@ var check = function(nums) {
     return true;
 };
 
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var longestMonotonicSubarray = function(nums) {
+    let count, maxCount = 0;
+    let increasing = false;
+
+    for(i = 0; i < nums.length; i++) {
+        if(nums[i] < nums[i - 1]){
+            if(!increasing) {
+                increasing = true;
+                count = 1;
+            }
+            count++;
+        }
+        else if(nums[i] > nums[i - 1]){
+            if(increasing){
+                increasing = false;
+                count = 1
+            }
+            count++;
+        }
+        else {
+            count = 1;
+        }
+
+        if (count > maxCount) {
+            maxCount = count;
+        }
+    }
+    return maxCount
+};
+
