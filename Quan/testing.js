@@ -666,3 +666,15 @@ var isArraySpecial = function(nums) {
     }
     return true;
 };
+
+var check = function(nums) {
+    let check = 0 
+    const length = nums.length;
+
+    for(i = 0; i < length; i++){
+        if(nums[i] > nums[(i + 1) % length]) check++;
+        if(check > 1) return false;
+    }
+    return true;
+};
+
