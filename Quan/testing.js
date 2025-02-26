@@ -798,3 +798,17 @@ var constructFromPrePost = function (preorder, postorder) {
     }
     return buildTree();
 };
+
+var maxAbsoluteSum = function(nums) {
+    let minPre = 0, maxPre = 0;
+    let cur = 0; 
+    let res = 0;
+
+    for (let n of nums){
+        cur += n;
+        res = Math.max(res, Math.abs(cur - minPre), Math.abs(cur - maxPre));
+        minPre = Math.min(minPre, cur);
+        maxPre = Math.max(maxPre, cur);
+    }
+    return res;
+};
