@@ -835,3 +835,55 @@ var checkPowersOfThree = function(n) {
     }
     return true;
 }
+
+class Bank {
+    private balances: number[];
+
+    constructor(balance: number[]) {
+        this.balances = balance;
+    }
+
+    public transfer(account1: number, account2: number, money: number): boolean {
+        if (!this.accountExists(account1) || !this.accountExists(account2)) return false;
+        let newBalance1 = this.calculateNewBalance(account1, money, false);
+        if (newBalance1 < 0) return false;
+        this.updateBalance(account1, newBalance1);
+        let newBalance2 = this.calculateNewBalance(account2, money);
+        this.updateBalance(account2, newBalance2);
+
+        return true;
+    }
+
+    public deposit(account: number, money: number): boolean {
+        if (!this.accountExists(account)) return false;
+        let newBalance = this.calculateNewBalance(account, money);
+        this.updateBalance(account, newBalance);
+
+        return true;
+    }
+
+    public withdraw(account: number, money: number): boolean {
+        if (!this.accountExists(account)) return false;
+        let newBalance = this.calculateNewBalance(account, money, false);
+        if (newBalance < 0) return false;
+        this.updateBalance(account, newBalance);
+
+        return true;
+    }
+
+    private accountExists(account: number): boolean {
+        return account <= this.balances.length;
+    }
+
+    private calculateNewBalance(account: number, money: number, deposit: boolean = true): number {
+        let balance = this.balances[account - 1];
+
+        if (deposit) return balance + money;
+
+        return balance - money;
+    }
+
+    private updateBalance(account: number, newBalance: number): void {
+        this.balances[account - 1] = newBalance;
+    }
+}
